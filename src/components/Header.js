@@ -6,7 +6,6 @@ const Header = ({ title, onAdd, showAdd }) => {
 
   const location = useLocation()
 
-
   return (
     <div>
       <header className='header'>
@@ -38,6 +37,5 @@ Header.propTypes = {
 //   color: 'red',
 //   backgroundColor: 'black'
 // }
-
 
 export default Header

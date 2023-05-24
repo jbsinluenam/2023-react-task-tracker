@@ -7,7 +7,6 @@ function TaskDetails() {
   const [task, setTask] = useState({})
   const [error, setError] = useState(null)
 
-
   const params = useParams()
   const navigate = useNavigate()
   const { pathname } = useLocation()
