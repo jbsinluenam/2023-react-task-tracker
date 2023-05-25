@@ -6,6 +6,7 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
 import TaskDetails from "./components/TaskDetails";
+import History from "./History";
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -98,7 +99,7 @@ function App() {
                 {/* display message if task = 0 */}
                 {tasks.length > 0 ? (
                   <Tasks
-                    tasks={tasks}
+                    tasks={tasks.filter((task) => !task.isCompleted)}
                     onDelete={deleteTask}
                     onToggle={toggleReminder}
                   />
@@ -110,6 +111,7 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route path="/task/:id" element={<TaskDetails />} />
+          <Route path="/history" element={<History />} />
         </Routes>
         <Footer />
       </div>
