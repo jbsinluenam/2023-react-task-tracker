@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Doctors Appointment",
+      "day": "Feb 5th at 2: 30pm",
+      "reminder": true,
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "text": "Meeting at School",
+      "day": "Feb 6th at 1: 30pm",
+      "reminder": false,
+      "isCompleted": false
+    },
+    {
+      "text": "test 2",
+      "day": "three",
+      "reminder": false,
+      "id": 5,
+      "isCompleted": true
+    },
+    {
+      "text": "sdfsdfds",
+      "day": "sdfdsfd",
+      "reminder": true,
+      "id": 6,
+      "isCompleted": true
+    },
+    {
+      "text": "Work on assignment",
+      "day": "June 6th at 1: 30pm",
+      "reminder": false,
+      "id": 7
+    }
+  ]
+}
