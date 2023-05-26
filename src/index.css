@@ -71,6 +71,20 @@ body {
   justify-content: space-between;
 }
 
+.task h3 > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusCompleted {
+  font-size: 8px;
+  padding: 2px 4px;
+  background: #a6a5a4;
+  color: #fff;
+  border-radius: 5px;
+}
+
 .add-form {
   margin-bottom: 40px;
 }

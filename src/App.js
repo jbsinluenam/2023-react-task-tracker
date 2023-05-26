@@ -27,6 +27,7 @@ function App() {
     return data;
   };
 
+  //fetch single task
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`);
     const data = await res.json();
@@ -46,17 +47,6 @@ function App() {
     const data = await res.json();
 
     setTasks([...tasks, data]);
-  };
-
-  const deleteTask = async (id) => {
-    // console.log('delete', id)
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "DELETE",
-    });
-
-    res.status === 200
-      ? setTasks(tasks.filter((task) => task.id !== id))
-      : alert("Error Deleting This Task");
   };
 
   //set reminder
@@ -82,6 +72,30 @@ function App() {
     );
   };
 
+  const toggleComplete = async (id) => {
+    console.log("complete", id);
+
+    const taskToToggle = await fetchTask(id);
+    const updTask = { ...taskToToggle, isCompleted: !taskToToggle.isCompleted };
+
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      //convert object to json
+      body: JSON.stringify(updTask),
+    });
+
+    const data = await res.json();
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, isCompleted: data.isCompleted } : task
+      )
+    );
+  };
+
   return (
     <Router>
       <div className="container">
@@ -100,8 +114,8 @@ function App() {
                 {tasks.length > 0 ? (
                   <Tasks
                     tasks={tasks.filter((task) => !task.isCompleted)}
-                    onDelete={deleteTask}
                     onToggle={toggleReminder}
+                    onToggleComplete={toggleComplete}
                   />
                 ) : (
                   "No Tasks To Show"
@@ -113,6 +127,7 @@ function App() {
           <Route path="/task/:id" element={<TaskDetails />} />
           <Route path="/history" element={<History />} />
         </Routes>
+
         <Footer />
       </div>
     </Router>
