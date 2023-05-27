@@ -143,7 +143,13 @@ function App() {
           <Route path="/task/:id" element={<TaskDetails />} />
           <Route
             path="/history"
-            element={<History tasks={tasks} setTasks={setTasks} />}
+            element={
+              <History
+                tasks={tasks}
+                onToggleComplete={toggleComplete}
+                onDelete={deleteTask}
+              />
+            }
           />
         </Routes>
 

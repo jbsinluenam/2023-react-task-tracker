@@ -1,11 +1,17 @@
 import Tasks from "./components/Tasks";
 
-const History = ({ tasks, setTasks }) => {
+const History = ({ tasks, onToggleComplete, onDelete }) => {
+  const filteredTask = tasks.filter((task) => task.isCompleted);
+
   return (
     <>
       {/* display message if task = 0 */}
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks.filter((task) => task.isCompleted)} />
+      {filteredTask.length > 0 ? (
+        <Tasks
+          tasks={filteredTask}
+          onToggleComplete={onToggleComplete}
+          onDelete={onDelete}
+        />
       ) : (
         "No Tasks To Show"
       )}

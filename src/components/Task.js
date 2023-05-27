@@ -1,5 +1,4 @@
 import { FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { MdRestore } from "react-icons/md";
 
 function Task({ task, onDelete, onToggle, onToggleComplete }) {
@@ -22,14 +21,15 @@ function Task({ task, onDelete, onToggle, onToggleComplete }) {
           />
           <FaTimes
             style={{ color: "red", cursor: "pointer" }}
-            // onClick={() => onDelete(task.id)}
             onClick={() =>
               task.isCompleted ? onDelete(task.id) : onToggleComplete(task.id)
             }
           />
         </div>
       </h3>
+
       <p>{task.day}</p>
+
       <p
         className="statusCompleted"
         style={{
@@ -38,11 +38,12 @@ function Task({ task, onDelete, onToggle, onToggleComplete }) {
       >
         completed
       </p>
-      {/* <p>
-        <Link to={`/task/${task.id}`}>View Details</Link>
-      </p> */}
     </div>
   );
 }
+
+Task.defaultProps = {
+  onToggle: () => {},
+};
 
 export default Task;
