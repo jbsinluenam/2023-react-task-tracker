@@ -21,6 +21,7 @@ function App() {
     getTasks();
   }, []);
 
+  //fetch ALL tasks
   const fetchTasks = async () => {
     const res = await fetch("http://localhost:5000/tasks");
     const data = await res.json();
@@ -34,6 +35,7 @@ function App() {
     return data;
   };
 
+  //add task
   const addTask = async (task) => {
     const res = await fetch("http://localhost:5000/tasks", {
       method: "POST",
@@ -47,6 +49,18 @@ function App() {
     const data = await res.json();
 
     setTasks([...tasks, data]);
+  };
+
+  //delete task
+  const deleteTask = async (id) => {
+    // console.log('delete', id)
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
+
+    res.status === 200
+      ? setTasks(tasks.filter((task) => task.id !== id))
+      : alert("Error Deleting This Task");
   };
 
   //set reminder
@@ -72,6 +86,7 @@ function App() {
     );
   };
 
+  //set complete
   const toggleComplete = async (id) => {
     console.log("complete", id);
 
@@ -116,6 +131,7 @@ function App() {
                     tasks={tasks.filter((task) => !task.isCompleted)}
                     onToggle={toggleReminder}
                     onToggleComplete={toggleComplete}
+                    onDelete={deleteTask}
                   />
                 ) : (
                   "No Tasks To Show"
@@ -125,7 +141,10 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route path="/task/:id" element={<TaskDetails />} />
-          <Route path="/history" element={<History />} />
+          <Route
+            path="/history"
+            element={<History tasks={tasks} setTasks={setTasks} />}
+          />
         </Routes>
 
         <Footer />
