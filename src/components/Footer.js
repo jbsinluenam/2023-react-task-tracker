@@ -6,8 +6,8 @@ const Footer = () => {
       <p>Copyright &copy; 2021</p>
       <div>
         <Link to="/">Home</Link>
-        {/* <Link to="/about">About</Link> */}
         <Link to="/history">History</Link>
+        <Link to="/about">About</Link>
       </div>
     </footer>
   );

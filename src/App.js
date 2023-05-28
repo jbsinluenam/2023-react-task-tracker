@@ -152,7 +152,6 @@ function App() {
             }
           />
         </Routes>
-
         <Footer />
       </div>
     </Router>
