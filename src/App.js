@@ -21,18 +21,21 @@ function App() {
     getTasks();
   }, []);
 
+  //fetch ALL tasks
   const fetchTasks = async () => {
     const res = await fetch("http://localhost:5000/tasks");
     const data = await res.json();
     return data;
   };
 
+  //fetch single task
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`);
     const data = await res.json();
     return data;
   };
 
+  //add task
   const addTask = async (task) => {
     const res = await fetch("http://localhost:5000/tasks", {
       method: "POST",
@@ -48,6 +51,7 @@ function App() {
     setTasks([...tasks, data]);
   };
 
+  //delete task
   const deleteTask = async (id) => {
     // console.log('delete', id)
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
@@ -82,6 +86,31 @@ function App() {
     );
   };
 
+  //set complete
+  const toggleComplete = async (id) => {
+    console.log("complete", id);
+
+    const taskToToggle = await fetchTask(id);
+    const updTask = { ...taskToToggle, isCompleted: !taskToToggle.isCompleted };
+
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      //convert object to json
+      body: JSON.stringify(updTask),
+    });
+
+    const data = await res.json();
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, isCompleted: data.isCompleted } : task
+      )
+    );
+  };
+
   return (
     <Router>
       <div className="container">
@@ -100,8 +129,9 @@ function App() {
                 {tasks.length > 0 ? (
                   <Tasks
                     tasks={tasks.filter((task) => !task.isCompleted)}
-                    onDelete={deleteTask}
                     onToggle={toggleReminder}
+                    onToggleComplete={toggleComplete}
+                    onDelete={deleteTask}
                   />
                 ) : (
                   "No Tasks To Show"
@@ -111,8 +141,18 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route path="/task/:id" element={<TaskDetails />} />
-          <Route path="/history" element={<History />} />
+          <Route
+            path="/history"
+            element={
+              <History
+                tasks={tasks}
+                onToggleComplete={toggleComplete}
+                onDelete={deleteTask}
+              />
+            }
+          />
         </Routes>
+
         <Footer />
       </div>
     </Router>

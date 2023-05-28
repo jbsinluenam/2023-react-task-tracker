@@ -4,7 +4,7 @@
       "id": 1,
       "text": "Doctors Appointment",
       "day": "Feb 5th at 2: 30pm",
-      "reminder": true,
+      "reminder": false,
       "isCompleted": false
     },
     {
@@ -15,25 +15,25 @@
       "isCompleted": false
     },
     {
-      "id": 3,
-      "text": "Food Shopping",
-      "day": "Feb 5th at 2: 30pm",
+      "text": "Work on assignment",
+      "day": "June 6th at 1: 30pm",
       "reminder": false,
+      "id": 7,
       "isCompleted": false
     },
     {
-      "text": "test 2",
-      "day": "three",
+      "text": "bla bla bla",
+      "day": "Tomorrow",
       "reminder": false,
-      "id": 5,
+      "id": 8,
       "isCompleted": true
     },
     {
-      "text": "sdfsdfds",
-      "day": "sdfdsfd",
-      "reminder": true,
-      "id": 6,
-      "isCompleted": true
+      "text": "Test add task",
+      "day": "date time",
+      "reminder": false,
+      "isCompleted": true,
+      "id": 9
     }
   ]
 }
